@@ -22,7 +22,7 @@ local state = {
 local function saveState()
   local f = fs.open(statePath, "w")
   if not f then return false end
-  f.write(textutils.serializeJSON(state))
+  f.write(textutils.serialize(state))
   f.close()
   return true
 end
@@ -30,13 +30,18 @@ end
 local function loadState()
   if not fs.exists(statePath) or fs.isDir(statePath) then return false end
   local f = fs.open(statePath, "r")
-  state = textutils.unserializeJSON(f.readAll())
+  state = textutils.unserialize(f.readAll())
   f.close()
   return true
 end
 
 local function moveDist(p1, p2)
   return math.abs(p1[1]-p2[1])+math.abs(p1[2]-p2[2])+math.abs(p1[3]-p2[3])
+end
+
+local function goForward()
+  turtle.dig()
+  turtle.forward()
 end
 
 loadState()
