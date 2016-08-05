@@ -48,7 +48,7 @@ loadState()
 
 while true do
   if state.mode==MODE_IDLE then
-    print("> ")
+    write("> ")
     local input = read()
   end
 end
