@@ -1,0 +1,48 @@
+local fs, turtle, textutils, math =
+      fs, turtle, textutils, math
+
+-- enums
+local DIR_FORWARD, DIR_LEFT, DIR_BACK, DIR_RIGHT, MODE_IDLE, MODE_DIG, MODE_RETURN, MODE_GO_DIG = 
+      0, 1, 2, 3, 4, 5, 6, 7
+
+
+local statePath = "data/state"
+local state = {
+  pos = {0, 0, 0},
+  chestPos = {-1, 0, 0},
+  dir = DIR_FORWARD, -- 0=X+, 1=Y+, 2=X-, 3=Y-
+  dig = {
+    start = {0, 0, 0},
+    dims = {16, 16, 64} -- one chunk from sea level
+    pos = {0, 0, 0} -- last position
+  },
+  mode = MODE_IDLE, -- 0=idle, 1=dig, 2=return, 3=go_dig
+}
+
+local function saveState()
+  local f = fs.open(statePath, "w")
+  if not f then return false end
+  f.write(textutils.serializeJSON(state))
+  f.close()
+  return true
+end
+
+local function loadState()
+  if not fs.exists(statePath) or fs.isDir(statePath) then return false end
+  local f = fs.open(statePath, "r")
+  state = textutils.unserializeJSON(f.readAll())
+  f.close()
+  return true
+end
+
+local function moveDist(p1, p2)
+  return math.abs(p1[1]-p2[1])+math.abs(p1[2]-p2[2])+math.abs(p1[3]-p2[3])
+end
+
+loadState()
+
+while true do
+  if state.mode==MODE_IDLE then
+    
+  end
+end
