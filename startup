@@ -13,8 +13,8 @@ local state = {
   dir = DIR_FORWARD, -- 0=X+, 1=Y+, 2=X-, 3=Y-
   dig = {
     start = {0, 0, 0},
-    dims = {16, 16, 64} -- one chunk from sea level
-    pos = {0, 0, 0} -- last position
+    dims = {16, 16, 64}, -- one chunk from sea level
+    pos = {0, 0, 0}, -- last position
   },
   mode = MODE_IDLE, -- 0=idle, 1=dig, 2=return, 3=go_dig
 }
@@ -48,6 +48,7 @@ loadState()
 
 while true do
   if state.mode==MODE_IDLE then
-    
+    print("> ")
+    local input = read()
   end
 end
